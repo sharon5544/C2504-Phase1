@@ -1,1 +1,15 @@
+1.to check nubmer is divisible by 3
 
+pseudo:Routine
+   function IsDivisibleBy3(num)
+      if num % 3 == 0
+return true
+      else return false
+
+pseudo: routine test 
+    function TestIsDivisibleBy3()
+        input num 
+        if IsDivisibleBy3(num)
+            print "Divisible By 3"
+        else 
+            print "Not Divisible By 3"

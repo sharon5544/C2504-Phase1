@@ -1,0 +1,55 @@
+input 1=num1
+input 2=num2
+result=0
+print "operation (+, -, *, /):"
+ input operation
+if operator == "+"
+output =num1 +num2
+print "the output of add is :"
+
+else if operator == "-"
+output =num1 - num2
+print "the output of sub is:"
+
+else if operator == "*"
+output =num1 * num2
+print "the output of mul is:"
+
+else if operator == "/"
+output =num1 / num2
+print "the output of div is:"
+
+else
+print "error division by zero not allowed "
+end if 
+end
+
+datatypes
+double num1
+double num2
+ double result
+print "operation (+, -, *, /):"
+ input operation
+if operator == "+"
+output =num1 +num2
+print "the output of add is :"
+
+else if operator == "-"
+output =num1 - num2
+print "the output of sub is:"
+
+else if operator == "*"
+output =num1 * num2
+print "the output of mul is:"
+
+else if operator == "/"
+output =num1 / num2
+print "the output of div is:"
+
+else
+print "error division by zero not allowed "
+end if 
+end
+
+
+

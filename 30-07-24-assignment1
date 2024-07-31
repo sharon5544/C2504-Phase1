@@ -1,15 +1,149 @@
-1.to check nubmer is divisible by 3
+1. To find average of two numbers
+ 
+pseudo :
+Input num1
+Input num2
+sum = num1 + num2
+average = sum/2
+print average
 
-pseudo:Routine
-   function IsDivisibleBy3(num)
-      if num % 3 == 0
+pseudo: routine
+function IsFindAverage(num)
+sum= num1 + num2
+average= sum/2
+return average
+
+pseudo:routine test
+
+procedure TestIsFindAverage()
+Input num1
+Input num2
+average= IsFindAverage(num1,num2)
+print average
+
+2. Find the cube of number
+ pseudo :
+Input num
+Cube= num * num *num
+print cube
+
+pseudo: routine
+function IsFindCube(num)
+Input num
+cube= num*num*num
+return cube
+
+pseudo: routine test
+procedure TestIsFindCube()
+Input num
+cube=IsFindCube(num)
+print cube
+
+3.number is divisible by 27
+Input num
+If num % 27 == 0
+print " Divisible by 27"
+else 
+print " Not divisible by 27"
+
+pseudo: routine 
+function IsDivisibleBy27(num)
+If num%27 == 0
 return true
-      else return false
+else return false
+
+pseudo : routine test 
+procedure TestIsDivisbleBy27()
+Input num
+if IsDivisibleBy27(num)
+print " Divisible by 27"
+else 
+print " Not divisible by 27"
+
+5. Number divisible by 3
+
+
+number is divisible by 3
+Input num
+If num % 3 == 0
+print " Divisible by 3"
+else 
+print " Not divisible by 3"
+
+pseudo: routine 
+function IsDivisibleBy3(num)
+If num%3 == 0
+return true
+else return false
+
+pseudo : routine test 
+procedureTestIsDivisbleBy3()
+Input num
+if IsDivisibleBy3(num)
+print " Divisible by 3"
+else 
+print " Not divisible by 3"
+
+6.print n natural numbers
+
+pseudo:
+for i = 0 to n-1
+sum + = 1
+print sum
+
+pseudo: routine 
+function IsFindNatural(num)
+for i=0 to n-1 
+sum+= 1
+Return sum
 
 pseudo: routine test 
-    function TestIsDivisibleBy3()
-        input num 
-        if IsDivisibleBy3(num)
-            print "Divisible By 3"
-        else 
-            print "Not Divisible By 3"
+procedure TestIsFindNaturalNumbers()
+Input num
+sum= IsFindNatural(num)
+print sum
+
+7. square of a num
+
+pseudo:
+ Input num
+square = num* num
+Print sum
+ 
+pseudo: routine 
+function IsFindSquare(num)
+Input num
+square=num * num
+Return square
+
+pseudo: routine test 
+procedure TestIsFindSquare()
+Input num
+square = IsFindSquare(num)
+Print square
+
+8.swap two numbers 
+
+pseudo:
+Input num1
+Input num2
+Input temp
+temp= num1
+num1= num2
+temp= num2
+print num1,num2
+
+pseudo: routine 
+function IsSwapNumber(num1,num2)
+temp= num1
+num1= num2
+temp=num2
+return num1,num2
+
+pseudo: routine test 
+
+procedure TestIsSwapNumber()
+Input num1 
+Input num2
+num1 num2=IsSwapNumber(num1,num2)
+print num1,num2

@@ -1,0 +1,18 @@
+ReadAndCountDoctorsMin6DigitsSalaried(): without array 
+function ReadAndCountDoctorsMin6DigitsSalaried():
+   count = 0 
+    Input n
+    for I = 1 .. n
+        Input salary 
+        isMin6Digits = IsDoctorSalaryMin6Digits(salary)
+        if isMin6Digits then 
+            count += 1
+        end if   
+    return count
+
+function TestIsDoctorSalaryMin6Digits()
+    Input doctorSalary
+    if IsDoctorSalaryMin6Digits(doctorSalary)
+        print "Doctor gets Min 6 digits salary"
+    end if 
+      

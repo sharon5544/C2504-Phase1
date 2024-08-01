@@ -1,0 +1,17 @@
+ReadAndFindSumOfDoctorsSalariesTillZero() use while loop
+
+
+function ReadAndFindSumOfDoctorsSalariesTillZero()
+    sum = 0 
+    input salary
+    while salary != 0
+        if (salary < 0) //Invalid salary
+            print "Input valid salary"
+            input salary
+            continue
+        end if         
+        
+        sum += salary
+        input salary
+    end while 
+    print sum 

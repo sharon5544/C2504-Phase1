@@ -1,0 +1,10 @@
+BEGIN
+	DECLARE count, num as INT
+	SET count = 0, num =2
+	
+	WHILE count < 10
+		PRINT num
+		count = count + 1
+		num = num + 2
+	END WHILE
+END

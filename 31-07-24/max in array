@@ -1,0 +1,10 @@
+int arr[]
+int i
+int maximum
+
+for i in arr
+	maximum = arr[i]
+	if arr[i+1] > maximum
+		maximum=arr[i+1]
+
+print maximum

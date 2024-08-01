@@ -1,0 +1,13 @@
+double balance = 0
+double amount
+
+fuction deposit(amount)
+	balance = balance + amount
+	print "Balance" balance
+
+function withdraw(amountt)
+	if amount > balance
+		print "Insuffient balance"
+	else
+		balance = balance - amount
+		print "Balance" balance

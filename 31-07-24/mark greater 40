@@ -1,0 +1,14 @@
+Input mark
+function IsMarkGreaterThan40(mark): 
+    return (mark > 40)
+
+function IsMarkGreaterThan40(mark): 
+    isMarkGreaterThan40 = (mark > 40)
+    return isMarkGreaterThan40
+
+function TestIsMarkGreaterThan40(): 
+    Input mark 
+    if IsMarkGreaterThan40(mark)
+        print "pass" 
+    else 
+        print "fail" 

@@ -1,0 +1,15 @@
+ReadAndFindMinSalaryOfNDoctors()
+
+function ReadAndFindMinSalaryOfNDoctors():
+    MinSalary = -1
+    Input N //number of salaries 
+    for I = 1 .. N 
+        Input salary
+        if I == 1 then 
+             MinSalary = salary 
+             continue 
+        end if 
+
+        if salary < MinSalary then 
+            MinSalary = salary
+        end if 

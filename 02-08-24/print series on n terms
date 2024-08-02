@@ -1,0 +1,152 @@
+print series 10, 12, 14, 16, ... N terms 
+
+1.using for loop
+a.pseudocode
+
+function PrintSeries10_12_14(numOfTerms)
+    term = 10
+    for I = 1; I <= numOfTerms ; I++ 
+        Print term + ' '
+        term = term + 2
+    end for 
+function TestPrintSeries10_12_14()
+    Input numOfTerms
+    PrintSeries10_12_14(numOfTerms)
+    
+b.csharp
+
+{
+    static void PrintSeries10_12_14(int numOfTerms)
+    {
+        int term = 10;
+        for (int I = 1; I <= numOfTerms ; I++)
+        {
+            Console.Write($"{term} ");
+            term = term + 2;
+        }
+    }
+    static void TestPrintSeries10_12_14()
+    {
+        Console.Write("Enter number of terms:");
+        int numOfTerms = int.Parse(Console.ReadLine());
+        Console.Write("Series: ");
+        PrintSeries10_12_14(numOfTerms);
+        Console.WriteLine();
+    }
+
+    static void Main(string[] args) //user: p
+    {
+        Console.WriteLine("--------------TestPrintSeries10_12_14...--------------");
+        TestPrintSeries10_12_14();
+        Console.WriteLine("--------------End TestPrintSeries10_12_14...--------------");
+        Console.WriteLine("Press any key to contine...");
+        Console.ReadKey();
+    }
+}
+
+c.output
+
+Enter number of terms:9
+Series: 10 12 14 16 18 20 22 24 26
+
+2.using while loop
+a.psudocode
+
+function PrintSeries10_12_14(numOfTerms)
+    term = 10
+    I = 1
+    while  I <= numOfTerms  
+        Print term + ' '
+        term = term + 2
+        I++
+    end while 
+function TestPrintSeries10_12_14()
+    Input numOfTerms
+    PrintSeries10_12_14(numOfTerms)
+b.csharp
+
+{
+    static void PrintSeries10_12_14(int numOfTerms)
+    {
+        int term = 10;
+        int I = 1;
+        while ( I <= numOfTerms  )
+        {
+            Console.Write($"{term} ");
+            term = term + 2;
+            I++;
+        }
+    }
+    static void TestPrintSeries10_12_14()
+    {
+        Console.Write("Enter number of terms:");
+        int numOfTerms = int.Parse(Console.ReadLine());
+        Console.Write("Series: ");
+        PrintSeries10_12_14(numOfTerms);
+        Console.WriteLine();
+    }
+
+    static void Main(string[] args) //user: p
+    {
+        Console.WriteLine("--------------TestPrintSeries10_12_14...--------------");
+        TestPrintSeries10_12_14();
+        Console.WriteLine("--------------End TestPrintSeries10_12_14...--------------");
+        Console.WriteLine("Press any key to contine...");
+        Console.ReadKey();
+    }
+}
+3.using do..while loop
+a.pseudocode
+
+function PrintSeries10_12_14(numOfTerms)
+    term = 10
+    I = 1;
+    do  
+        if numOfTerms == 0
+            break
+        then   
+        Print term + ' '
+        term = term + 2
+
+        I++
+    end while I <= numOfTerms
+function TestPrintSeries10_12_14()
+    Input numOfTerms
+    PrintSeries10_12_14(numOfTerms)
+b.csharp
+
+{
+    static void PrintSeries10_12_14(int numOfTerms)
+    {
+        int term = 10;
+        int I = 1;
+        do 
+        {
+            if (0 == numOfTerms)
+            {
+                break;
+            }
+            Console.Write($"{term} ");
+            term = term + 2;
+
+            I++;
+        } while (I <= numOfTerms) ;
+    }
+    static void TestPrintSeries10_12_14()
+    {
+        Console.Write("Enter number of terms:");
+        int numOfTerms = int.Parse(Console.ReadLine());
+        Console.Write("Series: ");
+        PrintSeries10_12_14(numOfTerms);
+        Console.WriteLine();
+    }
+
+    static void Main(string[] args) //user: p
+    {
+        Console.WriteLine("--------------TestPrintSeries10_12_14...--------------");
+        TestPrintSeries10_12_14();
+        Console.WriteLine("--------------End TestPrintSeries10_12_14...--------------");
+        Console.WriteLine("Press any key to contine...");
+        Console.ReadKey();
+    }
+}

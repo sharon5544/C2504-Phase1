@@ -1,0 +1,110 @@
+print series 0, 1, 1, 2, 3, 5, 8, 13, ... N terms 
+1.using for loop
+a.pseudocode
+function PrintSeries0_1_1_2_3_5(numOfTerms)
+    a = 0, b = 1
+    for I = 1; I <= numOfTerms ; I++ 
+        Print a + " "
+        temp = a
+        a = b
+        b = temp + b
+    end for 
+function TestPrintSeries0_1_1_2_3_5()
+    Input numOfTerms
+    PrintSeries0_1_1_2_3_5(numOfTerms)
+    
+
+b.csharp
+
+{
+    internal class Program
+    {
+
+        static void PrintSeries0_1_1_2_3_5(int numOfTerms)
+        {
+            int a = 0, b = 1;
+            for (int I = 1; I <= numOfTerms; I++) {
+                Console.Write($"{a} ");
+                int temp = a + b;
+                a = b;
+                b = temp;
+            }
+
+        }
+        static void TestPrintSeries0_1_1_2_3_5() {
+            Console.Write("Enter number of terms:");
+            int numOfTerms = int.Parse(Console.ReadLine());
+            Console.Write("Series: ");
+            PrintSeries0_1_1_2_3_5(numOfTerms);
+            Console.WriteLine();
+        }
+    static void Main(string[] args)
+        {
+            Console.WriteLine("--------------TestPrintSeries0_1_1_2_3_5...--------------");
+            TestPrintSeries0_1_1_2_3_5();
+            Console.WriteLine("--------------End TestPrintSeries0_1_1_2_3_5...--------------");
+            
+            Console.ReadKey();
+
+
+        }
+
+    }
+}   
+
+2.using while loop
+a. pseudocode
+    function PrintSeries0_1_1_2_3_5(numOfTerms)
+    int a = 0, b = 1
+            I = 1
+            while I <= N
+                print a + " "
+                temp = a + b;
+                a = b
+                b = temp
+                I++
+            end while
+function TestPrintSeries0_1_1_2_3_5()
+    Input numOfTerms
+    PrintSeries0_1_1_2_3_5(numOfTerms)
+
+b.csharp
+
+{
+    internal class Program
+    {
+        static void PrintSeries0_1_1_2_3_5(int numOfTerms)
+        {
+            int a = 0, b = 1;
+            int I = 1;
+            while ( I <= numOfTerms )
+            {
+                Console.Write($"{a} ");
+                int temp = a + b;
+                a = b;
+                b = temp;
+                I++;
+            }
+
+        }
+        static void TestPrintSeries0_1_1_2_3_5()
+        {
+            Console.Write("Enter number of terms:");
+            int numOfTerms = int.Parse(Console.ReadLine());
+            Console.Write("Series: ");
+            PrintSeries0_1_1_2_3_5(numOfTerms);
+            Console.WriteLine();
+        }
+        static void Main(string[] args)
+        {
+
+            Console.WriteLine("--------------TestPrintSeries0_1_1_2_3_5...--------------");
+            TestPrintSeries0_1_1_2_3_5();
+            Console.WriteLine("--------------End TestPrintSeries0_1_1_2_3_5...--------------");
+
+            Console.ReadKey();
+        }
+    }
+}
+
+    Q12: use do..while loop

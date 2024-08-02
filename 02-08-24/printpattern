@@ -1,0 +1,58 @@
+ print the following pattern 
+        1
+      1 2
+    1 2 3
+  1 2 3 4
+1 2 3 4 5 
+Here, N = number of lines = 5
+
+1.using for loop
+a.pseudocode
+
+function PrintNumTriangleMirroredRightAngle(N) = 5
+    for I = 1; I <= N; I++          
+        for J = 1; J <= N-I; J++     
+            Print "  "                 
+        end for 
+        for J = 1; J <= I; J++       
+            Print J + " "           
+        end for 
+        Print NewLine 
+    end for 
+function TestPrintNumTriangleMirroredRightAngle()
+    Input N 
+    PrintNumTriangleMirroredRightAngle(N)
+
+b.csharp
+{
+    static void PrintNumTriangleMirroredRightAngle(int N)
+    { 
+        for(int I = 1; I <= N; I++ )
+        { 
+            for(int J = 1; J <= N-I; J++)
+            {
+                Console.Write("  "); //2 spaces
+            }
+            for(int J = 1; J <= I; J++)
+            {
+                Console.Write($"{J} ");//num and space
+            }
+            Console.WriteLine();//new line 
+        }
+    }
+    static void TestPrintNumTriangleMirroredRightAngle()
+    {
+        Console.Write("Enter number of lines:");
+        int N = int.Parse(Console.ReadLine());
+        PrintNumTriangleMirroredRightAngle(N);
+    }
+    static void Main(string[] args) //user: p
+    {
+        Console.WriteLine("-----TestPrintNumTriangleMirroredRightAngle-----");
+        TestPrintNumTriangleMirroredRightAngle();
+        Console.WriteLine("-----End TestPrintNumTriangleMirroredRightAngle-----");
+        Console.WriteLine("Press any key to contine...");
+        Console.ReadKey();
+    }
+}
+

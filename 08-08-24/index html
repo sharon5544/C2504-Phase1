@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Page</title>
+    <style>
+        code{ background-color: rgb(16, 144, 144);
+        padding: 3px;
+        border-radius: 5px;
+        color: antiquewhite;
+        }
+     </style>
+</head>
+<body>
+    <h1>H1</h1>
+    <h2>H2</h2>
+    <h3>H3</h3>
+    <h4>H4</h4>
+    <h5>H5</h5>
+    <h6>H6</h6>
+    <p><code>Console.WriteLine()</code> to display text to console</p>
+    <p>Lorem ipsum dolor,<wbr> sit amet consectetur elit. Aspernatur reiciendis possimus<wbr> rerum amet,<br> sunt quaerat velit. Iste quidem earum recusandae, nisi cumque inventore animi, itaque cupiditate eos repellat voluptatum saepe.</p>
+    <pre>eree
+        rerer
+                ererere
+    </pre>
+</body>
+</html>

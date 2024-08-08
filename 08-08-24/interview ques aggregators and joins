@@ -1,0 +1,114 @@
+1. Different types of aggregators functions?
+ans.
+    a. SUM: Calculates the total sum of a set of values.
+    b. AVG: Calculates the average value of a set of values.
+    c. MAX: Returns the maximum value in a set of values.
+    d. MIN: Returns the minimum value in a set of values.
+    e. COUNT: Returns the number of rows in a table or the number of non-NULL values in a column.
+    f. GROUPING SETS: Groups a result set into groups based on one or more columns.
+
+2.Write an example for each aggregators?
+ans.
+    a. SUM
+       Example: SELECT SUM(salary) FROM employees;
+       -- Calculate the total sales by region
+        SELECT region, SUM(sales) AS total_sales
+        FROM sales_data
+        GROUP BY region;
+    b. AVG
+      Example: SELECT AVG(price) FROM products;
+      -- Calculate the average order value by customer
+      SELECT customer_id, AVG(order_value) AS avg_order_value
+      FROM orders
+      GROUP BY customer_id;
+
+    c. MAX
+       Example: SELECT MAX(salary) FROM employees;
+    d. MIN
+       Example: SELECT MIN(price) FROM products;
+       -- Calculate the maximum and minimum prices by product category
+      SELECT category, MAX(price) AS max_price, MIN(price) AS min_price
+      FROM products
+      GROUP BY category;
+
+    e. COUNT
+       Example: SELECT COUNT(*) FROM customers;
+       
+    f. GROUPING SETS
+      Example: SELECT department, AVG(salary) FROM employees
+      GROUP BY department;
+
+ 3.USES OF THE AGGREGATORS IN SQL
+ans.
+    A.Data Analysis
+      a.Analyze and summarize large datasets,
+      b.Providing insights into trends patterns, and correlations.
+    B.Reporting
+      a.To generate reports, such as sales reports, financial reports
+      b.Performance metrics.
+    C.Business Intelligence
+      a.Business intelligence applications to analyze and visualize data, supporting informed decision-making.
+    D.Data Mining
+      a.To identify patterns and relationships in large datasets.
+    E.Scientific Research
+      a.To analyze and summarize data, supporting hypothesis testing and theory development.
+
+4.Define joins in SQL?
+ans.
+    SQL JOINS are used to combine rows from two or more tables based on a related column between them.
+
+5.What are the different types of joins explain with examples?
+ans.
+    1. 1nner joints
+    Returns only the rows that have a match in both tables
+    
+    SELECT *
+    FROM customers
+    INNER JOIN orders
+    ON customers.customer_id = orders.customer_id;
+    
+    2.Left joints
+    Returns all the rows from the left table and the matching rows from the right table. If there are no matches, the result set will contain NULL values.
+    
+    SELECT *
+    FROM customers
+    LEFT JOIN orders
+    ON customers.customer_id = orders.customer_id;
+    
+    3.Right joins
+    Returns all the rows from the right table and the matching rows from the left table. If there are no matches, the result set will contain NULL values.
+    
+    SELECT *
+    FROM customers
+    RIGHT JOIN orders
+    ON customers.customer_id = orders.customer_id;
+    
+    4.FULL join
+    Returns all the rows from both tables, with NULL values in the columns where there are no matches.
+    
+    SELECT *
+    FROM customers
+    FULL JOIN orders
+    ON customers.customer_id = orders.customer_id;
+    
+    5.CROSS join
+    
+    Returns the Cartesian product of both tables, with each row of one table combined with each row of the other table.
+    
+    SELECT *
+    FROM customers
+    CROSS JOIN orders;
+
+7. Explain about the join conditions?
+ans. 
+   a.ON: Specifies the column(s) to join on.
+   b.USING: Specifies the column(s) to join on, without the need to specify the table names.
+   c.NATURAL: Joins the tables based on all columns with the same names.
+
+8.Key difference between aggregators and joins?
+ans.
+  a.Purpose: Aggregates are used to perform calculations on a set of data, while joins are used to combine data from multiple tables.
+  b.Output: Aggregates produce a single value or a set of summary statistics, while joins produce a combined set of rows from multiple tables.
+  c.Syntax: Aggregates use functions like SUM, AVG, and COUNT, while joins use keywords like INNER JOIN, LEFT JOIN, and RIGHT JOIN.
+  
+  In summary, aggregates are used to analyze and summarize data, while joins are used to combine data from multiple tables.

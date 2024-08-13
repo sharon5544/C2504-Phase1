@@ -1,0 +1,63 @@
+1.Find the Top N Salespersons by Sales
+Problem:
+Given a table Sales
+with columns SalesPersonID, SaleAmount, and SaleDate,
+find the top 5 salespersons by total sales amount.
+
+Table Structure:
+
+CREATE TABLE Sales (
+SalesPersonID INT,
+SaleAmount DECIMAL(10, 2),
+SaleDate DATE
+);
+
+ANS :- select SalesPersonID, sum(SaleAmount) as TotalSales
+       from Sales
+       groupby SalesPersonID
+       order by TotalSales DESC
+       limit 5;
+
+
+2. Find the Top N Salespersons by Sales
+Problem:
+Given a table Sales
+with columns SalesPersonID, SaleAmount, and SaleDate,
+find the top 3 salespersons by total sales amount.
+
+Table Structure:
+
+CREATE TABLE Sales (
+SalesPersonID INT,
+SaleAmount DECIMAL(10, 2),
+SaleDate DATE
+);
+
+ANS :- select SalesPersonID, sum(SaleAmount) as TotalSales
+       from Sales
+       groupby SalesPersonID
+       order by TotalSales DESC
+       limit 3;
+
+
+
+3. Find Departments with No Employees
+Problem: Given a Departments table and an Employees table,
+find departments that do not have any employees.
+Table Structure:
+
+CREATE TABLE Departments (
+DepartmentID INT,
+DepartmentName VARCHAR(100)
+);
+
+CREATE TABLE Employees (
+EmployeeID INT,
+DepartmentID INT
+);
+
+ANS :- select d.DepartmentName
+       from Departments d
+       left join Employees e on d.DepartmentID = e.DepartmentID
+       where e.DepartmentID is null; 
+

@@ -1,0 +1,58 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Surgery
+{
+
+    public class Surgery
+    {
+        public string SurgeryID { get; set; }
+        public int Duration { get; set; }
+        public Surgery(string surgeryID, int duration)
+        {
+            SurgeryID = surgeryID;
+            Duration = duration;
+        }
+        public bool Equals(Surgery other)
+        {
+            return other != null && Duration == other.Duration;
+        }
+        public bool NotEquals(Surgery other)
+        {
+            return !Equals(other);
+        }
+        public bool GreaterThan(Surgery other)
+        {
+            return other != null && Duration > other.Duration;
+        }
+        public bool GreaterThanEquals(Surgery other)
+        {
+            return other != null && Duration >= other.Duration;
+        }
+        public bool LessThan(Surgery other)
+        {
+            return other != null && Duration < other.Duration;
+        }
+        public bool LessThanEquals(Surgery other)
+        {
+            return other != null && Duration <= other.Duration;
+        }
+    }
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Surgery s1 = new Surgery("S001", 80);
+            Surgery s2 = new Surgery("S002", 100);
+
+            Console.WriteLine(s1.Equals(s2));
+            Console.WriteLine(s1.GreaterThan(s2));
+            Console.WriteLine(s1.LessThanEquals(s2));
+        }
+    }
+}
+

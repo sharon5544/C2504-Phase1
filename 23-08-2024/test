@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Prescription
+{
+    public class Prescription
+    {
+        public string Doctor { get; set; }
+        public string Patient { get; set; }
+        public int Dosage { get; set; }
+
+        public override string ToString()
+        {
+            return $"Doctor: {Doctor}, Patient:{Patient}, Dosage:{Dosage}mg";
+        }
+    }
+    class Program
+    {
+        static void Main()
+        {
+            Prescription[] prescriptions = new Prescription[3];
+            for (int i = 0; i < 3; i++)
+            {
+                Console.Write("Enter doctor's name: ");
+                string doctor = Console.ReadLine();
+                Console.Write("Enter patient's name: ");
+                string patient = Console.ReadLine();
+                Console.Write("Enter dosage in milligrams : ");
+                int dosage = int.Parse(Console.ReadLine());
+                Prescription prescription = new Prescription { Doctor = doctor, Patient = patient, Dosage = dosage };
+                prescriptions[i] = prescription;
+            }
+
+            SelectionSort(prescriptions);
+
+            Console.WriteLine("Sorted prescription by dosage:");
+            foreach (Prescription prescription in prescriptions)
+            {
+                Console.WriteLine(prescription.ToString());
+            }
+        }
+        static void SelectionSort(Prescription[] arr)
+        {
+            int n = arr.Length;
+            for (int I = 0; I < n - 1; I++)
+            {
+                int minIndex = I;
+                for (int j = I + 1; j < n; j++)
+                {
+                    if (arr[j].Dosage < arr[minIndex].Dosage)                   
+                    {
+                        minIndex = j;
+                    }
+
+                }
+                Prescription temp = arr[minIndex];
+                arr[minIndex] = arr[I];
+                arr[I] = temp;
+            }
+        }
+    }
+
+}

@@ -1,0 +1,126 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HospitalEquipmentManagement
+{
+    interface Serviceable
+    {
+        void Service();
+        string GetServiceStatus();
+    }
+    class Equipment
+    {
+        public int EquipmentID { get; set; }
+        public string Name { get; set; }
+    }
+    class DiagnosticEquipment : Equipment, Serviceable
+    {
+        public DateTime LastServiceDate { get; set; }
+        public void Service()
+        {
+            LastServiceDate = DateTime.Now;
+        }
+
+        public string GetServiceStatus()
+        {
+            TimeSpan timeSinceLastService = DateTime.Now - LastServiceDate;
+            if (timeSinceLastService.Days > 30)
+            {
+                return " Due for service";
+            }
+            else
+            {
+                return "Not due for service";
+            }
+        }
+        class SurgicalEquipment : Equipment, Serviceable
+        {
+            public int UsageCount { get; set; }
+            public void Service()
+            {
+                UsageCount = 0;
+            }
+
+            public string GetServiceStatus()
+            {
+                if (UsageCount > 50)
+                {
+                    return " Due for service";
+                }
+                else
+                {
+                    return "Not due for service";
+                }
+            }
+        }
+        class Program
+        {
+            static void Main()
+            {
+                Console.Write("Enter the number of equipments: ");
+                int n = Convert.ToInt32(Console.ReadLine());
+
+                Equipment[] equipments = new Equipment[n];
+                for (int i = 0; i < equipments.Length; i++)
+                {
+                    Console.WriteLine("Enter equipment details:");
+                    Console.WriteLine("ID: ");
+                    int equipmentID = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Name: ");
+                    string name = Console.ReadLine();
+                    Console.WriteLine("Type (Diagnostic/Surgical): ");
+                    string type = Console.ReadLine();
+
+                    if (type.ToLower() == "diagnostic")
+                    {
+                        DiagnosticEquipment diagnosticEquipment = new DiagnosticEquipment
+                        {
+                            EquipmentID = equipmentID,
+                            Name = name,
+                            LastServiceDate = DateTime.Now.AddDays(-30)
+                        };
+                        equipments[i] = diagnosticEquipment;
+                    }
+
+                    else if (type.ToLower() == "surgicals")
+                    {
+                        SurgicalEquipment surgicalEquipment = new SurgicalEquipment
+                        {
+                            EquipmentID = equipmentID,
+                            Name = name,
+                            UsageCount = 0
+                        };
+                        equipments[i] = surgicalEquipment;
+                    }
+                }
+
+                foreach (Equipment equipment in equipments)
+                {
+                    if (equipment is Serviceable)
+                    {
+                        ((Serviceable)equipment).Service();
+                    }
+                }
+
+
+
+                DisplayServiceStatus(equipments);
+            }
+            static void DisplayServiceStatus(Equipment[] equipments)
+            {
+                Console.WriteLine("Service Status: ");
+                foreach (Equipment equipment in equipments)
+                {
+                    if (equipment is Serviceable)
+                    {
+                        Console.WriteLine($"{equipment.Name} - {((Serviceable)equipment).GetServiceStatus()}");
+                    }
+                }
+            }
+        }
+    }
+}

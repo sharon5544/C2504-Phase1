@@ -1,0 +1,122 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PrescriptionCost
+{
+    class PrescriptionCost
+    {
+        public int PrescriptionID { get; set; }
+        public string PatientName { get; set; }
+
+        public string Medication { get; set; }
+
+        public double Cost { get; set; }
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            Console.WriteLine("Enter number of prescriptions: ");
+            int n = Convert.ToInt32(Console.ReadLine());
+
+            PrescriptionCost[] prescriptionCosts = new PrescriptionCost[n];
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine("Enter prescription details: ");
+                Console.WriteLine("Enter PrescriptionID: ");
+                int prescriptionID = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("PatientName: ");
+                string PatientName = Console.ReadLine();
+                Console.WriteLine("Medication: ");
+                string Medication = Console.ReadLine();
+                Console.WriteLine("Cost: ");
+                double cost = Convert.ToDouble(Console.ReadLine());
+
+                prescriptionCosts[i] = new PrescriptionCost
+                {
+                    PrescriptionID = prescriptionID,
+                    PatientName = PatientName,
+                    Medication = Medication,
+                    Cost = cost
+                };
+
+            }
+            PrescriptionCost lowestCostPrescription = FindLowestCostPrescription(prescriptionCosts);
+            Console.WriteLine("Lowest Cost Prescription: ");
+            Console.WriteLine($"PrescriptionID: {lowestCostPrescription.PrescriptionID}, PatientName: {lowestCostPrescription.PatientName}, Medication: {lowestCostPrescription.Medication}, Cost: {lowestCostPrescription.Cost}");
+
+            PrescriptionCost secondHighestCostsPrescription = FindSecondHighestCostPrescription(prescriptionCosts);
+            Console.WriteLine("Second Highest Cost Prescription: ");
+            Console.WriteLine($"PrescriptionID: {secondHighestCostsPrescription.PrescriptionID}, PatientName: {secondHighestCostsPrescription.PatientName}, Medication: {secondHighestCostsPrescription.Medication}, Cost: {secondHighestCostsPrescription.Cost}");
+
+            BubbleSortByMedicationName(prescriptionCosts);
+            Console.WriteLine("Prescription sorted by medication name: ");
+            foreach (var prescription in prescriptionCosts)
+            {
+                Console.WriteLine($"PrescriptionID: {prescription.PrescriptionID}, PatientName: {prescription.PrescriptionID}, Medication: {prescription.PrescriptionID}, Cost: {prescription.PrescriptionID}");
+
+            }
+        }
+        static PrescriptionCost FindLowestCostPrescription(PrescriptionCost[] prescriptionCosts)
+        {
+            PrescriptionCost lowestCostsPrescription = prescriptionCosts[0];
+            for (int i = 1; i < prescriptionCosts.Length; i++)
+            {
+                if (prescriptionCosts[i].Cost < lowestCostsPrescription.Cost)
+                {
+                    lowestCostsPrescription = prescriptionCosts[i];
+
+                }
+
+            }
+            return lowestCostsPrescription;
+
+        }
+        static PrescriptionCost FindSecondHighestCostPrescription(PrescriptionCost[] prescriptionCosts)
+        {
+            double maxCost = double.MinValue;
+            double secondmaxCost = double.MinValue;
+            PrescriptionCost secondHighestCostPrescription = null;
+
+            for (int i = 1; i < prescriptionCosts.Length; i++)
+            {
+                if (prescriptionCosts[i].Cost > maxCost)
+
+                {
+                    secondmaxCost = maxCost;
+                    maxCost = prescriptionCosts[i].Cost;
+                    secondHighestCostPrescription = prescriptionCosts[i];
+                }
+                else if (prescriptionCosts[i].Cost > secondmaxCost && prescriptionCosts[i].Cost != maxCost)
+                {
+                    secondmaxCost = prescriptionCosts[i].Cost;
+                    secondHighestCostPrescription = prescriptionCosts[i];
+                }
+            }
+            return secondHighestCostPrescription;
+        }
+
+        static void BubbleSortByMedicationName(PrescriptionCost[] prescriptionCosts)
+        {
+            int n = prescriptionCosts.Length;
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n - i - 1; j++)
+                {
+                    if (string.Compare(prescriptionCosts[j].Medication, prescriptionCosts[j + 1].Medication) > 0)
+                        {
+                        PrescriptionCost temp = prescriptionCosts[j];
+                        prescriptionCosts[j] = prescriptionCosts[j + 1];
+                        prescriptionCosts[j + 1] = temp;
+                    }
+                }
+
+
+            }
+        }
+    }
+}

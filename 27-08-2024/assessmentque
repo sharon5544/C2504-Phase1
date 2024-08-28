@@ -1,0 +1,159 @@
+using System;
+using System.Data.SqlClient;
+using System.Linq;
+using log4net;
+
+namespace PrescriptionApp
+{
+    public class PrescriptionException : Exception
+    {
+        public PrescriptionException(string message) : base(message) { }
+    }
+
+    public class Prescription
+    {
+        public string Doctor { get; set; }
+        public string Patient { get; set; }
+        public int Dosage { get; set; }
+
+        public override string ToString()
+        {
+            return $"Doctor: {Doctor}, Patient: {Patient}, Dosage: {Dosage}mg";
+        }
+    }
+
+    public class PrescriptionService
+    {
+        //private static string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=PrescriptionDb;Integrated Security=True;";
+        private static string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=PrescriptionDb;Integrated Security=True;";
+
+        public static void Read(Prescription[] prescriptions)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT Doctor, Patient, Dosage FROM Prescriptions";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    for (int i = 0; i < prescriptions.Length; i++)
+                    {
+                        if (!reader.Read())
+                        {
+                            throw new PrescriptionException("[0101] Server Error: No more data available.");
+                        }
+                        prescriptions[i] = new Prescription
+                        {
+                            Doctor = reader["Doctor"].ToString(),
+                            Patient = reader["Patient"].ToString(),
+                            Dosage = (int)reader["Dosage"]
+                        };
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new PrescriptionException($"[0102] SQL Error: {ex.Message}");
+            }
+            catch (PrescriptionException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw new PrescriptionException($"[0103] Error: {ex.Message}");
+            }
+        }
+
+        public static void Sort(Prescription[] prescriptions)
+        {
+            for (int i = 0; i < prescriptions.Length - 1; i++)
+            {
+                for (int j = 0; j < prescriptions.Length - i - 1; j++)
+                {
+                    if (prescriptions[j].Dosage > prescriptions[j + 1].Dosage)
+                    {
+                        var temp = prescriptions[j];
+                        prescriptions[j] = prescriptions[j + 1];
+                        prescriptions[j + 1] = temp;
+                    }
+                }
+            }
+        }
+
+        public static Prescription FindMin(Prescription[] prescriptions)
+        {
+            int minDosage = int.MaxValue;
+            Prescription minPrescription = null;
+            foreach (var prescription in prescriptions)
+            {
+                if (prescription.Dosage < minDosage)
+                {
+                    minDosage = prescription.Dosage;
+                    minPrescription = prescription;
+                }
+            }
+            return minPrescription;
+        }
+
+        public static Prescription FindSecondMax(Prescription[] prescriptions)
+        {
+            int maxDosage = int.MinValue;
+            int secondMaxDosage = int.MinValue;
+
+            Prescription maxPrescription = null;
+            Prescription secondMaxPrescription = null;
+
+            foreach (var prescription in prescriptions)
+            {
+                if (prescription.Dosage > maxDosage)
+                {
+                    if (maxDosage != int.MinValue)
+                    {
+                        secondMaxDosage = maxDosage;
+                        secondMaxPrescription = maxPrescription;
+                    }
+                    maxDosage = prescription.Dosage;
+                    maxPrescription = prescription;
+                }
+                else if (prescription.Dosage > secondMaxDosage && prescription.Dosage != maxDosage)
+                {
+                    secondMaxDosage = prescription.Dosage;
+                    secondMaxPrescription = prescription;
+                }
+            }
+            return secondMaxPrescription;
+        }
+    }
+
+    public class Program
+    {
+        private static readonly ILog log = LogManager.GetLogger(typeof(Program));
+
+        static void Main(string[] args)
+        {
+            Prescription[] prescriptions = new Prescription[3];
+            try
+            {
+                PrescriptionService.Read(prescriptions);
+            }
+            catch (PrescriptionException ex)
+            {
+                log.Error(ex.Message);
+            }
+
+            Prescription min = PrescriptionService.FindMin(prescriptions);
+            log.Info($"Min dosage prescription: {min}");
+
+            Prescription secondMax = PrescriptionService.FindSecondMax(prescriptions);
+            log.Info($"Second max dosage prescription: {secondMax}");
+
+            PrescriptionService.Sort(prescriptions);
+            string output = string.Join(" | ", prescriptions.Select(p => p.ToString()));
+            log.Info($"Sorted prescriptions: {output}");
+        }
+    }
+}

@@ -1,0 +1,187 @@
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+
+namespace PrescriptionApp
+{
+    public class PrescriptionService
+    {
+        private static string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=PrescriptionDb;Integrated Security=True;";
+
+        public static void Create(Prescription prescription)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    string query = "INSERT INTO Prescriptions (Doctor, Patient, Dosage) VALUES (@Doctor, @Patient, @Dosage)";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
+                    cmd.Parameters.AddWithValue("@Doctor", prescription.Doctor);
+                    cmd.Parameters.AddWithValue("@Patient", prescription.Patient);
+                    cmd.Parameters.AddWithValue("@Dosage", prescription.Dosage);
+
+                    conn.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if (rowsAffected == 0)
+                    {
+                        throw new PrescriptionException("No rows were affected. Prescription might not be created.");
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new PrescriptionException($"[0102] SQL Error: {ex.Message}", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new PrescriptionException($"[0103] Error: {ex.Message}", ex);
+            }
+        }
+
+        public static List<Prescription> Read()
+        {
+            List<Prescription> prescriptions = new List<Prescription>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT Id, Doctor, Patient, Dosage FROM Prescriptions";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        prescriptions.Add(new Prescription
+                        {
+                            Id = (int)reader["Id"],
+                            Doctor = reader["Doctor"].ToString(),
+                            Patient = reader["Patient"].ToString(),
+                            Dosage = (int)reader["Dosage"]
+                        });
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new PrescriptionException($"[0102] SQL Error: {ex.Message}", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new PrescriptionException($"[0103] Error: {ex.Message}", ex);
+            }
+            return prescriptions;
+        }
+
+        public static void Update(Prescription prescription)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    string query = "UPDATE Prescriptions SET Doctor = @Doctor, Patient = @Patient, Dosage = @Dosage WHERE Id = @Id";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
+                    cmd.Parameters.AddWithValue("@Doctor", prescription.Doctor);
+                    cmd.Parameters.AddWithValue("@Patient", prescription.Patient);
+                    cmd.Parameters.AddWithValue("@Dosage", prescription.Dosage);
+                    cmd.Parameters.AddWithValue("@Id", prescription.Id);
+
+                    conn.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if (rowsAffected == 0)
+                    {
+                        throw new PrescriptionException("No rows were affected. Prescription might not be updated.");
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new PrescriptionException($"[0102] SQL Error: {ex.Message}", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new PrescriptionException($"[0103] Error: {ex.Message}", ex);
+            }
+        }
+
+        public static void Delete(int id)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    string query = "DELETE FROM Prescriptions WHERE Id = @Id";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
+                    cmd.Parameters.AddWithValue("@Id", id);
+
+                    conn.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if (rowsAffected == 0)
+                    {
+                        throw new PrescriptionException("No rows were affected. Prescription might not be deleted.");
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new PrescriptionException($"[0102] SQL Error: {ex.Message}", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new PrescriptionException($"[0103] Error: {ex.Message}", ex);
+            }
+        }
+
+        public static void Sort(List<Prescription> prescriptions)
+        {
+            prescriptions.Sort((x, y) => x.Dosage.CompareTo(y.Dosage));
+        }
+
+        public static Prescription FindMin(List<Prescription> prescriptions)
+        {
+            if (prescriptions.Count == 0) return null;
+
+            Prescription minPrescription = prescriptions[0];
+            foreach (Prescription prescription in prescriptions)
+            {
+                if (prescription.Dosage < minPrescription.Dosage)
+                {
+                    minPrescription = prescription;
+                }
+            }
+            return minPrescription;
+        }
+
+        public static Prescription FindSecondMax(List<Prescription> prescriptions)
+        {
+            if (prescriptions.Count < 2) return null;
+
+            int maxDosage = int.MinValue;
+            int secondMaxDosage = int.MinValue;
+
+            Prescription maxPrescription = null;
+            Prescription secondMaxPrescription = null;
+
+            foreach (Prescription prescription in prescriptions)
+            {
+                if (prescription.Dosage > maxDosage)
+                {
+                    secondMaxDosage = maxDosage;
+                    secondMaxPrescription = maxPrescription;
+                    maxDosage = prescription.Dosage;
+                    maxPrescription = prescription;
+                }
+                else if (prescription.Dosage > secondMaxDosage && prescription.Dosage != maxDosage)
+                {
+                    secondMaxDosage = prescription.Dosage;
+                    secondMaxPrescription = prescription;
+                }
+            }
+            return secondMaxPrescription;
+        }
+    }
+}

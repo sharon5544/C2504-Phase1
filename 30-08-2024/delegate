@@ -1,0 +1,49 @@
+public delegate bool CheckNumber(int number);
+
+    internal class Program
+    {
+        public static bool IsEven(int number) => number % 2 == 0;
+
+        public static bool IsOdd(int number) => number % 2 != 0;
+
+        public static void Main(string[] args)
+        {
+            List<int> numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+            Console.WriteLine("Enter 'odd' or 'even' to check for numbers in the list:");
+            string userInput = Console.ReadLine().ToLower();
+
+            CheckNumber checkNumber;
+
+            if (userInput == "even")
+            {
+                checkNumber = IsEven;
+                Console.WriteLine("Checking for even numbers in the list:");
+            }
+            else if (userInput == "odd")
+            {
+                checkNumber = IsOdd;
+                Console.WriteLine("Checking for odd numbers in the list:");
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter 'odd' or 'even'.");
+                return;
+            }
+
+            bool found = false;
+            foreach (int number in numbers)
+            {
+                if (checkNumber(number))
+                {
+                    Console.WriteLine($"{number} matches the criteria.");
+                    found = true;
+                }
+            }
+
+            if (!found)
+            {
+                Console.WriteLine($"No {userInput} numbers found in the list.");
+            }
+        }
+    }

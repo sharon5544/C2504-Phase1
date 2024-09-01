@@ -1,0 +1,72 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PrescriptionApp;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PrescriptionApp.Tests
+{
+    [TestClass()]
+    public class PrescriptionServiceTests
+    {
+        [TestMethod()]
+        public void SortTest()
+        {
+            Prescription[] prescriptions = new Prescription[3]
+            {
+                new Prescription { Doctor = "Dr. Smith", Patient = "John Doe", Dosage = 10 },
+                new Prescription { Doctor = "Dr. Johnson", Patient = "Jane Doe", Dosage = 5 },
+                new Prescription { Doctor = "Dr. Brown", Patient = "Bob Smith", Dosage = 15 }
+            };
+
+            PrescriptionService.Sort(prescriptions);
+
+
+            Assert.AreEqual(5, prescriptions[0].Dosage);
+            Assert.AreEqual(10, prescriptions[1].Dosage);
+            Assert.AreEqual(15, prescriptions[2].Dosage);
+
+
+        }
+        [TestMethod]
+        public void FindMin_Prescriptions_ReturnsMinDosagePrescription()
+        {
+
+            Prescription[] prescriptions = new Prescription[3]
+            {
+            new Prescription { Doctor = "Dr. Smith", Patient = "John Doe", Dosage = 10 },
+            new Prescription { Doctor = "Dr. Johnson", Patient = "Jane Doe", Dosage = 5 },
+            new Prescription { Doctor = "Dr. Brown", Patient = "Bob Smith", Dosage = 15 }
+            };
+
+
+            Prescription minPrescription = PrescriptionService.FindMin(prescriptions);
+
+
+            Assert.IsNotNull(minPrescription);
+            Assert.AreEqual(5, minPrescription.Dosage);
+        }
+        [TestMethod]
+        public void FindSecondMax_Prescriptions_ReturnsSecondMaxDosagePrescription()
+        {
+
+            Prescription[] prescriptions = new Prescription[3]
+            {
+            new Prescription { Doctor = "Dr. Smith", Patient = "John Doe", Dosage = 10 },
+            new Prescription { Doctor = "Dr. Johnson", Patient = "Jane Doe", Dosage = 5 },
+            new Prescription { Doctor = "Dr. Brown", Patient = "Bob Smith", Dosage = 15 }
+            };
+
+
+            Prescription secondMaxPrescription = PrescriptionService.FindSecondMax(prescriptions);
+
+
+            Assert.IsNotNull(secondMaxPrescription);
+            Assert.AreEqual(10, secondMaxPrescription.Dosage);
+        }
+
+    }
+            
+    }

@@ -1,0 +1,26 @@
+using System;
+
+namespace PrescriptionApp
+{
+    public class Prescription
+    {
+        public int Id { get; set; }  
+        public string Doctor { get; set; }
+        public string Patient { get; set; }
+        public int Dosage { get; set; }
+
+        public override string ToString()
+        {
+            return $"Id: {Id}, Doctor: {Doctor}, Patient: {Patient}, Dosage: {Dosage}mg";
+        }
+    }
+
+    public class PrescriptionException : Exception
+    {
+        public PrescriptionException(string message) : base(message) { }
+
+        public PrescriptionException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+    }
+}
